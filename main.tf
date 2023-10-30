@@ -61,12 +61,13 @@ output "database_subnet_group" {
 }
 
 # AWS RDS ( CI/CD에서 사용 예정 )
-/* module "aws_eks_rds" {
+module "aws_eks_rds" {
   source      = "./modules/rds"
   db_port     = 3306
   db_name     = "django_db"
   db_username = "admin"
   db_password = "RDSterraform123!"
+  depends_on = [ module.aws_eks_cluster ]
 }
 
 output "rds_instance_address" {
@@ -83,4 +84,4 @@ module "ecr" {
   tags = {
     Terraform = "true"
   }
-} */
+}

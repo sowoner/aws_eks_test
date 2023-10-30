@@ -15,7 +15,6 @@ data "aws_eks_cluster_auth" "cluster" {
   name = module.eks.cluster_id
 }
 
-
 provider "kubernetes" {
   host                   = data.aws_eks_cluster.cluster.endpoint
   cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
@@ -25,8 +24,6 @@ provider "kubernetes" {
 # AWS EKS Cluster DataSource DOCS 
 # - aws_eks_cluster      : https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/eks_cluster.html
 # - aws_eks_cluster_auth : https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/eks_cluster_auth
-
-
 
 # VPC
 module "vpc" {
@@ -45,8 +42,6 @@ module "vpc" {
     "TerraformManaged" = "true"
   }
 }
-
-
 
 # Security-Group (BastionHost)
 module "BastionHost_SG" {
@@ -207,7 +202,6 @@ resource "aws_route" "private_subnet_2" {
   network_interface_id   = aws_network_interface.NAT_ENI.id
   depends_on             = [module.vpc, aws_instance.NAT_Instance]
 }
-
 
 
 # Terraform EKS Module DOCS : https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest
